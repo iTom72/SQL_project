@@ -20,4 +20,4 @@ FROM
 INNER JOIN skills_dim ON data_science_skills.skill_id = skills_dim.skill_id
 ORDER BY
     data_science_skills.skill_count DESC
-LIMIT 10
+LIMIT 10;
