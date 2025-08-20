@@ -17,6 +17,7 @@ This project was created to get a clearer picture of what employers are looking 
 
 # Tools I Used
 **SQL:** to query and analyze the dataset.
+
 **PostgreSQL:** as the database system for managing the data.
 
 # The Analysis
