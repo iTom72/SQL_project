@@ -1,9 +1,3 @@
-/*
-Question: What are the top payinh Data-Science jobs?
-- Identify the top 10 higest-paying Dana Science roles that are avilable remotely.
-- Focuses on job postings with existing salaries.
-*/
-
 SELECT
     job_id,
     job_title,

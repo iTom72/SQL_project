@@ -1,7 +1,3 @@
-/*
-Question: What skills are associated with the highest-paying Data Science jobs?
-*/
-
 WITH top_paying_jobs AS(
     SELECT
         job_id,
