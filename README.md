@@ -20,6 +20,8 @@ This project was created to get a clearer picture of what employers are looking 
 
 **PostgreSQL:** as the database system for managing the data.
 
+**Python(Pandas):** To visualize data.
+
 # The Analysis
 
 ### 1. Top Paying Data Science Jobs
@@ -50,7 +52,42 @@ LIMIT 10;
 ![top_paying_jobs](pics/1_top_paying_jobs.png)
 
 
- 
+## 2. Most Skills Associated With Highest Paid Jobs
+To highlight the highest paid skills that are associated with top-paying jobs, I got the top-paying jobs's skills and filtered them by average yearly salary, company's name and the job title. This query shows the associated skills with the top-paying jobs.
+
+```
+WITH top_paying_jobs AS(
+    SELECT
+        job_id,
+        job_title,
+        salary_year_avg,
+        company_dim.name AS company_name
+        
+    FROM
+        job_postings_fact
+    LEFT JOIN
+        company_dim ON job_postings_fact.company_id = company_dim.company_id
+    WHERE
+        job_title_short = 'Data Scientist' AND
+        salary_year_avg IS NOT NULL AND
+        job_location = 'Anywhere'
+    ORDER BY
+        salary_year_avg DESC
+    LIMIT 10
+)
+SELECT top_paying_jobs.*,
+    skills_dim.skills
+FROM
+    top_paying_jobs 
+INNER JOIN skills_job_dim ON top_paying_jobs.job_id = skills_job_dim.job_id
+INNER JOIN skills_dim ON  skills_job_dim.skill_id = skills_dim.skill_id
+ORDER BY
+    top_paying_jobs.salary_year_avg DESC;
+```
+
+
+### Reulsts
+![top_paying_jobs_skills](pics/2_top_paying_jobs_skills.png)
 
 # What I Learned
 
