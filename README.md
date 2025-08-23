@@ -46,6 +46,10 @@ ORDER BY
 LIMIT 10;
 ```
 
+#### Result
+![top_paying_jobs](pics/1_top_paying_jobs.png)
+
+
  
 
 # What I Learned
