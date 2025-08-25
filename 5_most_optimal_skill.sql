@@ -10,11 +10,11 @@ WITH top_paying_skills AS(
     LEFT JOIN
         skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
     WHERE
-        job_postings_fact.salary_year_avg IS NOT NULL AND job_postings_fact.job_title_short = 'Data Scientist'
+        job_postings_fact.salary_year_avg IS NOT NULL
+         AND job_postings_fact.job_title_short = 'Data Scientist'
+         AND job_postings_fact.job_work_from_home IS TRUE
     GROUP BY 
         skills_dim.skill_id
-    HAVING
-        COUNT(skills_dim.skill_id) > 100
 ),
 
 data_science_skills AS (
@@ -27,6 +27,7 @@ data_science_skills AS (
     WHERE
         job_postings_fact.job_title_short = 'Data Scientist'
         AND job_postings_fact.salary_year_avg IS NOT NULL
+        AND job_postings_fact.job_work_from_home IS TRUE
     GROUP BY
         skill_id
 ),
@@ -43,7 +44,6 @@ most_demand_skills AS (
 )
 
 SELECT
-    most_demand_skills.skill_id,
     most_demand_skills.skill_name,
     top_paying_skills.average_yearly_salary,
     most_demand_skills.skill_count
@@ -51,8 +51,7 @@ FROM
     most_demand_skills
 INNER JOIN top_paying_skills ON most_demand_skills.skill_id = top_paying_skills.skill_id
 WHERE
-    most_demand_skills.skill_count > 100 -- Filtering low demand skills
+    most_demand_skills.skill_count > 100
 ORDER BY
---    most_demand_skills.skill_count DESC
     top_paying_skills.average_yearly_salary DESC
-
+    --most_demand_skills.skill_count DESC

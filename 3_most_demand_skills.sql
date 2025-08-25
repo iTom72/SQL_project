@@ -7,7 +7,8 @@ WITH data_science_skills AS (
     INNER JOIN job_postings_fact ON skills_job_dim.job_id = job_postings_fact.job_id
     WHERE
         job_postings_fact.job_title_short = 'Data Scientist'
---        AND job_postings_fact.job_work_from_home IS TRUE -- remote jobs only
+        AND job_postings_fact.job_work_from_home IS TRUE
+        AND job_postings_fact.salary_year_avg IS NOT NULL
     GROUP BY
         skill_id
 )
